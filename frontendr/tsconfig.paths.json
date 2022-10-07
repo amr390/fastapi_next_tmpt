@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@app": ["app"],
+      "@app/*": ["app/*"],
+      "@components": ["components"],
+      "@components/*": ["components/*"],
+      "@config": ["config"],
+      "@config/*": ["config/*"],
+      "@features": ["features"],
+      "@features/*": ["features/*"],
+      "@hooks": ["hooks"],
+      "@hooks/*": ["hooks/*"],
+      "@lib": ["lib"],
+      "@lib/*": ["lib/*"],
+      "@pages": ["pages"],
+      "@pages/*": ["pages/*"],
+      "@redux": ["redux"],
+      "@redux/*": ["redux/*"],
+      "@styles": ["styles"],
+      "@styles/*": ["styles/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
+      "@services": ["services"],
+      "@services/*": ["services/*"],
+      "@interfaces": ["interfaces"],
+      "@interfaces/*": ["interfaces/*"]
+
+    }
+  }
+}
