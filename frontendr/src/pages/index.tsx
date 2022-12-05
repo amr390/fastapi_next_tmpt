@@ -1,11 +1,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout } from '../components/verde/_layout'
-import { authenticationService } from '@services/authenticationService'
+import { useAuth } from '@hooks/useAuth'
 
 const IndexPage = () => {
-  const url = authenticationService.isLoggedIn() ? '/profile' : '/login';
+  const { userId, authenticated } = useAuth()
+  const url = authenticated ? '/profile' : '/login'
+  //TODO: replace by context
+  const [me, setMe] = useState(null)
+
+  /* useEffect(() => { */
+  /*   fetchWrapper */
+  /*     .get(`${API_ROUTES.USER_ME_GET}/${userId}`) */
+  /*     .then((response) => response.json()) */
+  /*     .then((data) => { */
+  /*       setMe(data) */
+  /*       console.log('user is ', me, data) */
+  /*     }) */
+  /* }, [me, userId]) */
+
+  /* toast(authenticated ? `user is authenticated: ${userId}` : 'Not yet authenticated') */
   return (
     <Layout>
       <section

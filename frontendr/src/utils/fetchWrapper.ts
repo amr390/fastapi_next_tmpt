@@ -1,11 +1,33 @@
 
+import { authService } from '@services/authService'
+import { useState } from 'react'
 
-const get = (): void => {
+const {token, setToken} = useState(authService.getToken())
+
+const __handle = () => {
+   
 
 }
-const post = (): void => {}
-const put = (): void => {}
-const _delete = (): void => {}
+
+const _addHeaders = () => ({
+    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+})
+  
+
+const get = (url: string): Promise<any> => {
+  let opts = Object.assign({}, _addHeaders(), { method: 'GET'})
+  return fetch(url, opts)
+}
+
+const post = (url: string): void => {
+
+}
+const put = (url: string): void => { 
+}
+const _delete = (url: string): void => { 
+}
 
 export const fetchWrapper = {
   get,
@@ -13,5 +35,3 @@ export const fetchWrapper = {
   put,
   _delete,
 }
-
-
