@@ -1,12 +1,27 @@
-from typing import TYPE_CHECKING
-
-from sqlalchemy import Boolean, Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
+from sqlalchemy.schema import Table
 from sqlalchemy.orm import relationship
+from uvicorn.config import logging
 
 from app.db.base_class import Base
 
-if TYPE_CHECKING:
-    from .item import Item  # noqa: F401
+# this should be if from typing import TYPE_CHECKING but it turns out is null
+import typing
+# if typing.TYPE_CHECKING:
+from .role import Role  # noqa: F401
+from .customer import Customer  # noqa: F401
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+
+user_roles_table = Table(
+    "user_roles",
+    Base.metadata,
+    Column("user_id", ForeignKey("user.id")),
+    Column("role_id", ForeignKey("role.id")),
+)
 
 
 class User(Base):
@@ -16,4 +31,5 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean(), default=True)
     is_superuser = Column(Boolean(), default=False)
-    items = relationship("Item", back_populates="owner")
+    profile = relationship("Customer", back_populates="credentials")
+    roles = relationship("Role", secondary=user_roles_table)
